@@ -1,1 +1,1 @@
-import nsrdbtools
+from nsrdbtools import *

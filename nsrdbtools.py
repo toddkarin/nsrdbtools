@@ -153,17 +153,17 @@ def import_csv(filename):
     year=str(df['Year'][0])
 
 
-    # if df['Minute'][1] - df['Minute'][0]==30:
-    #     interval = '30'
-    #     df = df.set_index(
-    #       pd.date_range('1/1/{yr}'.format(yr=year), freq=interval + 'Min', periods=60*24*365 / int(interval)))
-    # elif df['Minute'][1] - df['Minute'][0]==0:
-    #     interval = '60'
-    #     df = df.set_index(
-    #         pd.date_range('1/1/{yr}'.format(yr=year), freq=interval + 'Min', periods=60*24*365 / int(interval)))
-    # else:
-    #     print('Interval not understood!')
-    #
+    if np.diff(df[0:2].Minute) == 30:
+        interval = '30'
+        df = df.set_index(
+          pd.date_range('1/1/{yr}'.format(yr=year), freq=interval + 'Min', periods=60*24*365 / int(interval)))
+    elif df['Minute'][1] - df['Minute'][0]==0:
+        interval = '60'
+        df = df.set_index(
+            pd.date_range('1/1/{yr}'.format(yr=year), freq=interval + 'Min', periods=60*24*365 / int(interval)))
+    else:
+        print('Interval not understood!')
+
 
 
     return (df, info)
